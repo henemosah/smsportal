@@ -1,0 +1,294 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<html>
+<head>
+
+
+
+    @*<meta name="viewport" content="width=device-width" />*@
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Login - SMS Portal</title>
+    <!-- Custom fonts for this template-->
+    @*<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">*@
+    <link href="~/Content/startbootstrap-sb-admin-2-master/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <!-- Custom styles for this template-->
+    @*<link href="css/sb-admin-2.min.css" rel="stylesheet">*@
+    <link href="~/Content/startbootstrap-sb-admin-2-master/css/sb-admin-2.min.css" rel="stylesheet" />
+
+
+</head>
+<body class="bg-gradient-primary">
+
+    <script language="JavaScript" type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#rdSms').on('click', function () {
+
+            @*var url = '@Url.Action("Index", "SmsView")';*@
+            document.location = '@Url.Action("Index", "SmsView")';
+            });
+
+           @*$('#rdWhatsapp').on('click', function () {
+
+            document.location = '@Url.Action("Index", "WhatsappView")';
+           });*@
+
+            $("#rdWhatsapp").click(function () {
+
+               document.location = '@Url.Action("Index", "WhatsappView")';
+
+
+
+            });
+
+            $("#register").click(function () {
+
+
+
+                var firstname = $("#FirstName").val();
+                var lastname = $("#LastName").val();
+                var email = $("#InputEmail").val();
+                var userPass = $("#Password").val();
+
+
+                var msg = "";
+                if (firstname == "") { msg = "Please fill in the first name! <br/>"; }
+                if (lastname == "") { msg = "Please fill in the last name! <br/>"; }
+                if (email == "") { msg += "Please fill in the email address <br/>"; }
+                if (userPass == "") { msg += "Please fill in the password <br/>"; }
+                if (msg != "") {
+                    //$.confirm({
+                    //    title: 'FIll Out Every Field',
+                    //    content: msg,
+                    //    type: 'red',
+                    //    typeAnimated: true,
+                    //    buttons: {
+                    //        close: function () {
+
+                    //        }
+                    //    }
+                    //});
+                    //return false;
+                    alert(msg);
+                    return false;
+                }
+
+                //var token = $('[name=__RequestVerificationToken]').val();
+                setTimeout(function () {
+                    $.ajax({
+                        type: "POST",
+                        url: '@Url.Action("UserRegistration", "Home")',
+                        async: true,
+                        data: {
+                            //__RequestVerificationToken: token,
+                            firstname: firstname,
+                            lastname: lastname,
+                            email: email,
+                            userPass: userPass,
+                        },
+                        dataType: 'json',
+                        error: function (data) {
+                            debugger;
+                            alert(data);
+                        },
+                        success: function (data) {
+                            if (data.status == false) {
+
+                                pause_sensor = false;
+                                $.confirm({
+                                    title: 'Registration Went Wrong',
+                                    content: data.msg,
+                                    type: 'red',
+                                    typeAnimated: true,
+                                    buttons: {
+                                        close: function () {
+                                        }
+                                    }
+                                });
+                            }
+                            else {
+
+                                firstname == "";
+                                lastname == "";
+                                email == "";
+                                userPass == "";
+
+                                alert('User Regisered Successfully');
+                                var url = "";
+                                                    url = '@Url.Action("index", "Home")'; //Default
+
+
+
+                                                    window.open(
+                                                      url
+                                                      // <- This is what makes it open in a new window.
+                                                    );
+
+                                @*$.confirm({
+                                    title: 'User Regisered Successfully',
+                                    content: data.msg,
+                                    type: 'red',
+                                    typeAnimated: true,
+                                    buttons: {
+                                        close: function () {
+                                            var url = "";
+                                                    url = '@Url.Action("index", "Home")'; //Default
+
+
+
+                                                    window.open(
+                                                      url
+                                                      // <- This is what makes it open in a new window.
+                                                    );
+
+                                        }
+                                    }
+                                });*@
+
+
+                            }
+
+                        },
+
+
+                    });
+
+
+
+
+
+                });
+
+
+
+
+
+
+            });
+
+             $("#register2").click(function () {
+
+               document.location = '@Url.Action("dashboard", "Home")';
+
+
+
+            });
+        });
+
+    </script>
+
+
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            @*<div class="col-lg-6 d-none d-lg-block bg-login-image"></div*@>
+                            @*<div class="col-lg-6 d-none">*@
+                            @*<div class="p-5">*@
+                            <img src="~/Content/startbootstrap-sb-admin-2-master/img/whatSms.png" />
+                            @*</div>*@
+                            @*</div>*@
+                            <div class="col-lg-6">
+                                @*<img src="~/Content/startbootstrap-sb-admin-2-master/img/smswhatsapp.png" />*@
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Add new User</h1>
+                                    </div>
+                                    <form class="user">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                   id="FirstName" aria-describedby="emailHelp"
+                                                   placeholder="enter firstname...">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control form-control-user"
+                                                   id="LastName" aria-describedby="emailHelp"
+                                                   placeholder="enter lasstname...">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user"
+                                                   id="Password" placeholder="Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user"
+                                                   id="InputEmail" aria-describedby="emailHelp"
+                                                   placeholder="Enter email...">
+                                        </div>
+
+
+                                        @*<div class="form-group">
+                <div class="custom-control custom-checkbox small">
+                    <input type="checkbox" class="custom-control-input" id="customCheck">
+                    <label class="custom-control-label" for="customCheck">
+                        Remember
+                        Me
+                    </label>
+                </div>
+            </div>*@
+                                        <a href="index.html" style="display:none" class="btn btn-primary btn-user btn-block">
+                                            Login
+                                        </a>
+                                        <hr>
+                                        @*<a href="index.html" class="btn btn-google btn-user btn-block">
+                <i class="fab fa-google fa-fw"></i> Login with Google
+            </a>*@
+                                        @*<a href="index.html" class="btn btn-facebook btn-user btn-block">
+                <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+            </a>*@
+                                    </form>
+                                    @*<hr>
+                                    <div class="text-center">
+                                        <button id="rdSms" class="btn btn-primary pull-right" type="submit"><i class="fa fa-key"></i> SMS</button>
+                                    </div>
+                                    <div class="text-center">
+                                        <button id="rdWhatsapp" class="btn btn-primary pull-right" type="submit"><i class="fa fa-key"></i> Whatsapp</button>
+                                    </div>
+                                    <div class="text-center">
+                                        <button id="dashboard" class="btn btn-primary pull-right" type="submit"><i class="fa fa-key"></i> dashboard</button>
+                                    </div>*@
+                                    <div class="text-center">
+                                        <button id="register" class="btn btn-primary pull-right" type="submit">register</button>
+                                    </div>
+                                    @*<div class="text-center">
+            <a class="small" href="forgot-password.html">Forgot Password?</a>
+        </div>
+        <div class="text-center">
+            <a class="small" href="register.html">Create an Account!</a>
+        </div>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+
+    <script src="~/Content/startbootstrap-sb-admin-2-master/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/startbootstrap-sb-admin-2-master/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/startbootstrap-sb-admin-2-master/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Content/startbootstrap-sb-admin-2-master/js/sb-admin-2.min.js"></script>
+</body>
+</html>

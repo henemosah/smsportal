@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ePOD_DBModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="baseSMS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="atc_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="delivery_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="customer_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="waybill_no" Type="nvarchar" MaxLength="50" />
+          <Property Name="customer_name" Type="nvarchar" MaxLength="255" />
+          <Property Name="ip_address" Type="nvarchar" MaxLength="50" />
+          <Property Name="code_a" Type="nvarchar" MaxLength="10" />
+          <Property Name="code_b" Type="nvarchar" MaxLength="10" />
+          <Property Name="sms_status" Type="bit" />
+          <Property Name="response" Type="nvarchar(max)" />
+          <Property Name="create_datetime" Type="datetime" />
+          <Property Name="response_datetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="dds_config">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dds_dns" Type="nvarchar" MaxLength="50" />
+          <Property Name="ip_address" Type="nvarchar" MaxLength="50" />
+          <Property Name="database_name" Type="nvarchar" MaxLength="50" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SMSResponse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code_b" Type="nvarchar" MaxLength="10" />
+          <Property Name="damaged" Type="int" />
+          <Property Name="caked" Type="int" />
+          <Property Name="complaints" Type="nvarchar(max)" />
+          <Property Name="created_on" Type="datetime" />
+          <Property Name="sms_request_id" Type="int" />
+          <Property Name="missing" Type="int" />
+        </EntityType>
+        <EntityType Name="userlogin">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="salt" Type="uniqueidentifier" />
+          <Property Name="roleID" Type="int" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="datecreated" Type="datetime" />
+          <Property Name="status" Type="int" />
+        </EntityType>
+        <Function Name="sms_count_per_month" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sms_whatsapp_count_per_day" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="User_Details_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="status" Type="int" Mode="In" />
+          <Parameter Name="RoleID" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ePOD_DBModel1StoreContainer">
+          <EntitySet Name="baseSMS" EntityType="Self.baseSMS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dds_config" EntityType="Self.dds_config" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SMSResponse" EntityType="Self.SMSResponse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="userlogin" EntityType="Self.userlogin" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ePOD_DBModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="baseSM">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="atc_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="delivery_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customer_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="phone_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="waybill_no" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="customer_name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ip_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="code_a" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="code_b" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="sms_status" Type="Boolean" />
+          <Property Name="response" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="create_datetime" Type="DateTime" Precision="3" />
+          <Property Name="response_datetime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="dds_config">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dds_dns" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ip_address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="database_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SMSResponse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code_b" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="damaged" Type="Int32" />
+          <Property Name="caked" Type="Int32" />
+          <Property Name="complaints" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="created_on" Type="DateTime" Precision="3" />
+          <Property Name="sms_request_id" Type="Int32" />
+          <Property Name="missing" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="ePOD_DBEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="baseSMS" EntityType="Self.baseSM" />
+          <EntitySet Name="dds_config" EntityType="Self.dds_config" />
+          <EntitySet Name="SMSResponses" EntityType="Self.SMSResponse" />
+          <EntitySet Name="userlogins" EntityType="ePOD_DBModel1.userlogin" />
+          <FunctionImport Name="User_Details_Insert">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="RoleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sms_count_per_month" ReturnType="Collection(ePOD_DBModel1.sms_count_per_month_Result)" />
+          <FunctionImport Name="sms_whatsapp_count_per_day" ReturnType="Collection(ePOD_DBModel1.sms_whatsapp_count_per_day_Result)" />
+        </EntityContainer>
+        <EntityType Name="userlogin">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="salt" Type="Guid" />
+          <Property Name="roleID" Type="Int32" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="datecreated" Type="DateTime" Precision="3" />
+          <Property Name="status" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="sms_count_per_month_Result">
+          <Property Type="Int32" Name="id" Nullable="true" />
+          <Property Type="String" Name="name" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="cx" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sms_whatsapp_count_per_day_Result">
+          <Property Type="String" Name="name" Nullable="false" MaxLength="8" />
+          <Property Type="Int32" Name="counters" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ePOD_DBModel1StoreContainer" CdmEntityContainer="ePOD_DBEntities1">
+          <EntitySetMapping Name="baseSMS">
+            <EntityTypeMapping TypeName="ePOD_DBModel1.baseSM">
+              <MappingFragment StoreEntitySet="baseSMS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="atc_no" ColumnName="atc_no" />
+                <ScalarProperty Name="delivery_no" ColumnName="delivery_no" />
+                <ScalarProperty Name="customer_no" ColumnName="customer_no" />
+                <ScalarProperty Name="phone_no" ColumnName="phone_no" />
+                <ScalarProperty Name="waybill_no" ColumnName="waybill_no" />
+                <ScalarProperty Name="customer_name" ColumnName="customer_name" />
+                <ScalarProperty Name="ip_address" ColumnName="ip_address" />
+                <ScalarProperty Name="code_a" ColumnName="code_a" />
+                <ScalarProperty Name="code_b" ColumnName="code_b" />
+                <ScalarProperty Name="sms_status" ColumnName="sms_status" />
+                <ScalarProperty Name="response" ColumnName="response" />
+                <ScalarProperty Name="create_datetime" ColumnName="create_datetime" />
+                <ScalarProperty Name="response_datetime" ColumnName="response_datetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dds_config">
+            <EntityTypeMapping TypeName="ePOD_DBModel1.dds_config">
+              <MappingFragment StoreEntitySet="dds_config">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="dds_dns" ColumnName="dds_dns" />
+                <ScalarProperty Name="ip_address" ColumnName="ip_address" />
+                <ScalarProperty Name="database_name" ColumnName="database_name" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SMSResponses">
+            <EntityTypeMapping TypeName="ePOD_DBModel1.SMSResponse">
+              <MappingFragment StoreEntitySet="SMSResponse">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="code_b" ColumnName="code_b" />
+                <ScalarProperty Name="damaged" ColumnName="damaged" />
+                <ScalarProperty Name="caked" ColumnName="caked" />
+                <ScalarProperty Name="complaints" ColumnName="complaints" />
+                <ScalarProperty Name="created_on" ColumnName="created_on" />
+                <ScalarProperty Name="sms_request_id" ColumnName="sms_request_id" />
+                <ScalarProperty Name="missing" ColumnName="missing" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userlogins">
+            <EntityTypeMapping TypeName="ePOD_DBModel1.userlogin">
+              <MappingFragment StoreEntitySet="userlogin">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="datecreated" ColumnName="datecreated" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="salt" ColumnName="salt" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="User_Details_Insert" FunctionName="ePOD_DBModel1.Store.User_Details_Insert" />
+          <FunctionImportMapping FunctionImportName="sms_count_per_month" FunctionName="ePOD_DBModel1.Store.sms_count_per_month">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ePOD_DBModel1.sms_count_per_month_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="cx" ColumnName="cx" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sms_whatsapp_count_per_day" FunctionName="ePOD_DBModel1.Store.sms_whatsapp_count_per_day">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ePOD_DBModel1.sms_whatsapp_count_per_day_Result">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="counters" ColumnName="counters" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
