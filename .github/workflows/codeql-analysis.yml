@@ -65,7 +65,7 @@ jobs:
 
     - run: |
        # make bootstrap
-       msbuild
+       msbuild -t:restore,build -p:RestorePackagesConfig=true
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
